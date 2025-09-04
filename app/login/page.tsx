@@ -15,15 +15,13 @@ export default function LoginPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
 
-  const { login } = useAuth()
+  const { login, isLoading } = useAuth()
   const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setIsLoading(true)
     setError("")
 
     try {
@@ -31,7 +29,6 @@ export default function LoginPage() {
       router.push("/dashboard")
     } catch (err: any) {
       setError(err.message || "Email ou senha incorretos")
-      setIsLoading(false)
     }
   }
 
