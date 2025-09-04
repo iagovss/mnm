@@ -275,19 +275,32 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <Card className="w-full max-w-2xl">
-        <CardHeader className="text-center">
-          <div className="w-12 h-12 bg-primary-500 rounded-lg flex items-center justify-center mx-auto mb-4">
-            <span className="text-white font-bold text-lg">M</span>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-400/30 to-blue-600/30 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-blue-500/30 to-blue-700/30 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-blue-300/20 to-blue-400/20 rounded-full blur-3xl animate-pulse delay-500" />
+      </div>
+
+      <Card className="relative backdrop-blur-sm bg-white/90 border-0 shadow-2xl w-full max-w-2xl">
+        <CardHeader className="text-center space-y-6">
+          <div className="mx-auto w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl flex items-center justify-center shadow-lg">
+            <Sparkles className="w-8 h-8 text-white" />
           </div>
-          <CardTitle className="text-2xl font-bold">Criar Conta</CardTitle>
-          <CardDescription>{step === 1 ? "Informações básicas" : "Complete seu perfil"}</CardDescription>
+          <div className="space-y-2">
+            <CardTitle className="text-3xl font-bold bg-gradient-to-r from-blue-900 to-blue-700 bg-clip-text text-transparent">
+              Criar Conta
+            </CardTitle>
+            <CardDescription className="text-blue-600 text-lg">
+              {step === 1 ? "Informações básicas" : "Complete seu perfil"}
+            </CardDescription>
+          </div>
 
           <div className="flex justify-center mt-4">
-            <div className="flex space-x-2">
-              <div className={`w-3 h-3 rounded-full ${step >= 1 ? "bg-primary-500" : "bg-gray-300"}`} />
-              <div className={`w-3 h-3 rounded-full ${step >= 2 ? "bg-primary-500" : "bg-gray-300"}`} />
+            <div className="flex space-x-3">
+              <div className={`w-4 h-4 rounded-full transition-all duration-300 ${step >= 1 ? "bg-gradient-to-r from-blue-600 to-blue-800 shadow-lg" : "bg-gray-300"}`} />
+              <div className={`w-4 h-4 rounded-full transition-all duration-300 ${step >= 2 ? "bg-gradient-to-r from-blue-600 to-blue-800 shadow-lg" : "bg-gray-300"}`} />
             </div>
           </div>
         </CardHeader>
@@ -298,46 +311,50 @@ export default function SignupPage() {
               <div className="space-y-3">
                 <Label>Tipo de conta</Label>
                 <RadioGroup value={userType} onValueChange={(value) => setUserType(value as typeof userType)}>
-                  <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-gray-50">
-                    <RadioGroupItem value="client-person" id="client-person" />
+                  <div className="flex items-center space-x-3 p-4 border-2 border-blue-100 rounded-xl hover:bg-blue-50 hover:border-blue-200 transition-all duration-200 cursor-pointer">
+                    <RadioGroupItem value="client-person" id="client-person" className="border-blue-300" />
+                    <User className="w-5 h-5 text-blue-600" />
                     <Label htmlFor="client-person" className="cursor-pointer flex-1">
-                      <div className="font-medium">Cliente Pessoa Física</div>
-                      <div className="text-sm text-gray-600">Preciso de serviços como pessoa física</div>
+                      <div className="font-semibold text-gray-900">Cliente Pessoa Física</div>
+                      <div className="text-sm text-blue-600">Preciso de serviços como pessoa física</div>
                     </Label>
                   </div>
-                  <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-gray-50">
-                    <RadioGroupItem value="client-company" id="client-company" />
+                  <div className="flex items-center space-x-3 p-4 border-2 border-blue-100 rounded-xl hover:bg-blue-50 hover:border-blue-200 transition-all duration-200 cursor-pointer">
+                    <RadioGroupItem value="client-company" id="client-company" className="border-blue-300" />
+                    <Building className="w-5 h-5 text-blue-600" />
                     <Label htmlFor="client-company" className="cursor-pointer flex-1">
-                      <div className="font-medium">Cliente Empresa</div>
-                      <div className="text-sm text-gray-600">Preciso de serviços para minha empresa</div>
+                      <div className="font-semibold text-gray-900">Cliente Empresa</div>
+                      <div className="text-sm text-blue-600">Preciso de serviços para minha empresa</div>
                     </Label>
                   </div>
-                  <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-gray-50">
-                    <RadioGroupItem value="provider-person" id="provider-person" />
+                  <div className="flex items-center space-x-3 p-4 border-2 border-blue-100 rounded-xl hover:bg-blue-50 hover:border-blue-200 transition-all duration-200 cursor-pointer">
+                    <RadioGroupItem value="provider-person" id="provider-person" className="border-blue-300" />
+                    <Briefcase className="w-5 h-5 text-blue-600" />
                     <Label htmlFor="provider-person" className="cursor-pointer flex-1">
-                      <div className="font-medium">Prestador Pessoa Física</div>
-                      <div className="text-sm text-gray-600">Quero oferecer serviços como autônomo</div>
+                      <div className="font-semibold text-gray-900">Prestador Pessoa Física</div>
+                      <div className="text-sm text-blue-600">Quero oferecer serviços como autônomo</div>
                     </Label>
                   </div>
-                  <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-gray-50">
-                    <RadioGroupItem value="provider-company" id="provider-company" />
+                  <div className="flex items-center space-x-3 p-4 border-2 border-blue-100 rounded-xl hover:bg-blue-50 hover:border-blue-200 transition-all duration-200 cursor-pointer">
+                    <RadioGroupItem value="provider-company" id="provider-company" className="border-blue-300" />
+                    <Building className="w-5 h-5 text-blue-600" />
                     <Label htmlFor="provider-company" className="cursor-pointer flex-1">
-                      <div className="font-medium">Prestador Empresa</div>
-                      <div className="text-sm text-gray-600">Quero oferecer serviços como empresa</div>
+                      <div className="font-semibold text-gray-900">Prestador Empresa</div>
+                      <div className="text-sm text-blue-600">Quero oferecer serviços como empresa</div>
                     </Label>
                   </div>
                 </RadioGroup>
               </div>
 
-              <div className="space-y-2">
-                <Label>Foto de perfil *</Label>
-                <div className="flex items-center space-x-4">
+              <div className="space-y-3">
+                <Label className="text-sm font-medium text-gray-700">Foto de perfil *</Label>
+                <div className="flex items-center space-x-6">
                   {photoPreview ? (
                     <div className="relative">
                       <img
                         src={photoPreview || "/placeholder.svg"}
                         alt="Preview"
-                        className="w-20 h-20 rounded-full object-cover border-2 border-gray-200"
+                        className="w-24 h-24 rounded-full object-cover border-4 border-blue-200 shadow-lg"
                       />
                       <button
                         type="button"
@@ -347,14 +364,14 @@ export default function SignupPage() {
                           const fileInput = document.getElementById("photo-upload") as HTMLInputElement
                           if (fileInput) fileInput.value = ""
                         }}
-                        className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center hover:bg-red-600"
+                        className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-7 h-7 flex items-center justify-center hover:bg-red-600 transition-colors shadow-lg"
                       >
                         <X className="w-4 h-4" />
                       </button>
                     </div>
                   ) : (
-                    <div className="w-20 h-20 border-2 border-dashed border-gray-300 rounded-full flex items-center justify-center hover:border-primary-400 transition-colors">
-                      <Upload className="w-8 h-8 text-gray-400" />
+                    <div className="w-24 h-24 border-3 border-dashed border-blue-300 rounded-full flex items-center justify-center hover:border-blue-400 transition-colors bg-blue-50">
+                      <Upload className="w-8 h-8 text-blue-400" />
                     </div>
                   )}
                   <div className="flex-1">
@@ -369,7 +386,7 @@ export default function SignupPage() {
                       type="button"
                       variant="outline"
                       size="sm"
-                      className="w-full bg-transparent"
+                      className="w-full bg-blue-50 border-blue-200 text-blue-700 hover:bg-blue-100 hover:border-blue-300"
                       onClick={() => {
                         const fileInput = document.getElementById("photo-upload") as HTMLInputElement
                         if (fileInput) fileInput.click()
@@ -378,35 +395,43 @@ export default function SignupPage() {
                       <Upload className="w-4 h-4 mr-2" />
                       {profilePhoto ? "Trocar foto" : "Escolher foto"}
                     </Button>
-                    <p className="text-xs text-gray-500 mt-1">JPG, PNG ou GIF. Máximo 5MB.</p>
+                    <p className="text-xs text-blue-600 mt-2">JPG, PNG ou GIF. Máximo 5MB.</p>
                   </div>
                 </div>
-                {!profilePhoto && <p className="text-sm text-red-600">Foto de perfil é obrigatória</p>}
+                {!profilePhoto && <p className="text-sm text-red-600 bg-red-50 p-2 rounded-lg border border-red-200">Foto de perfil é obrigatória</p>}
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="name">{isCompany ? "Nome do responsável" : "Nome completo"} *</Label>
-                  <Input
-                    id="name"
-                    type="text"
-                    value={formData.name}
-                    onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
-                    placeholder={isCompany ? "Nome do responsável" : "Seu nome completo"}
-                    required
-                  />
+                  <Label htmlFor="name" className="text-sm font-medium text-gray-700">{isCompany ? "Nome do responsável" : "Nome completo"} *</Label>
+                  <div className="relative">
+                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <Input
+                      id="name"
+                      type="text"
+                      value={formData.name}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
+                      placeholder={isCompany ? "Nome do responsável" : "Seu nome completo"}
+                      className="pl-10 h-12 border-gray-200 focus:border-blue-500 focus:ring-blue-500 rounded-lg"
+                      required
+                    />
+                  </div>
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email *</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
-                    placeholder="seu@email.com"
-                    required
-                  />
+                  <Label htmlFor="email" className="text-sm font-medium text-gray-700">Email *</Label>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <Input
+                      id="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
+                      placeholder="seu@email.com"
+                      className="pl-10 h-12 border-gray-200 focus:border-blue-500 focus:ring-blue-500 rounded-lg"
+                      required
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -482,29 +507,37 @@ export default function SignupPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="password">Senha *</Label>
-                  <Input
-                    id="password"
-                    type="password"
-                    value={formData.password}
-                    onChange={(e) => setFormData((prev) => ({ ...prev, password: e.target.value }))}
-                    placeholder="Mínimo 8 caracteres"
-                    required
-                  />
+                  <Label htmlFor="password" className="text-sm font-medium text-gray-700">Senha *</Label>
+                  <div className="relative">
+                    <Eye className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <Input
+                      id="password"
+                      type="password"
+                      value={formData.password}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, password: e.target.value }))}
+                      placeholder="Mínimo 8 caracteres"
+                      className="pl-10 h-12 border-gray-200 focus:border-blue-500 focus:ring-blue-500 rounded-lg"
+                      required
+                    />
+                  </div>
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="confirmPassword">Confirmar senha *</Label>
-                  <Input
-                    id="confirmPassword"
-                    type="password"
-                    value={formData.confirmPassword}
-                    onChange={(e) => setFormData((prev) => ({ ...prev, confirmPassword: e.target.value }))}
-                    placeholder="Confirme sua senha"
-                    required
-                  />
+                  <Label htmlFor="confirmPassword" className="text-sm font-medium text-gray-700">Confirmar senha *</Label>
+                  <div className="relative">
+                    <EyeOff className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <Input
+                      id="confirmPassword"
+                      type="password"
+                      value={formData.confirmPassword}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, confirmPassword: e.target.value }))}
+                      placeholder="Confirme sua senha"
+                      className="pl-10 h-12 border-gray-200 focus:border-blue-500 focus:ring-blue-500 rounded-lg"
+                      required
+                    />
+                  </div>
                   {formData.confirmPassword && formData.password !== formData.confirmPassword && (
-                    <p className="text-sm text-red-600">Senhas não coincidem</p>
+                    <p className="text-sm text-red-600 bg-red-50 p-2 rounded-lg border border-red-200">Senhas não coincidem</p>
                   )}
                 </div>
               </div>
@@ -566,8 +599,16 @@ export default function SignupPage() {
                 </div>
               </div>
 
-              <Button type="button" onClick={nextStep} className="w-full" disabled={!validateStep1()}>
-                Continuar
+              <Button 
+                type="button" 
+                onClick={nextStep} 
+                className="w-full bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none" 
+                disabled={!validateStep1()}
+              >
+                <div className="flex items-center justify-center gap-2">
+                  <span>Continuar</span>
+                  <ArrowRight className="w-4 h-4" />
+                </div>
               </Button>
             </div>
           )}
@@ -869,22 +910,57 @@ export default function SignupPage() {
 
               {error && <div className="text-sm text-red-600 bg-red-50 p-3 rounded-md">{error}</div>}
 
-              <div className="flex space-x-3">
-                <Button type="button" variant="outline" onClick={() => setStep(1)} className="flex-1">
-                  Voltar
+              <div className="flex space-x-4">
+                <Button 
+                  type="button" 
+                  variant="outline" 
+                  onClick={() => setStep(1)} 
+                  className="flex-1 border-blue-200 text-blue-700 hover:bg-blue-50 hover:border-blue-300 py-3 rounded-xl font-semibold transition-all duration-200"
+                >
+                  <div className="flex items-center justify-center gap-2">
+                    <ArrowLeft className="w-4 h-4" />
+                    <span>Voltar</span>
+                  </div>
                 </Button>
-                <Button type="submit" className="flex-1" disabled={isLoading || !validateStep2()}>
-                  {isLoading ? "Criando conta..." : "Criar conta"}
+                <Button 
+                  type="submit" 
+                  className="flex-1 bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none" 
+                  disabled={isLoading || !validateStep2()}
+                >
+                  {isLoading ? (
+                    <div className="flex items-center justify-center gap-2">
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      <span>Criando conta...</span>
+                    </div>
+                  ) : (
+                    <div className="flex items-center justify-center gap-2">
+                      <CheckCircle className="w-4 h-4" />
+                      <span>Criar conta</span>
+                    </div>
+                  )}
                 </Button>
               </div>
             </form>
           )}
 
-          <div className="mt-6 text-center text-sm">
-            <span className="text-gray-600">Já tem uma conta? </span>
-            <Link href="/login" className="text-primary-600 hover:text-primary-700 font-medium">
-              Entrar
-            </Link>
+          <div className="mt-6 text-center">
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t border-blue-200" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-white px-3 text-blue-500 font-medium">Já tem uma conta?</span>
+              </div>
+            </div>
+            <div className="mt-4">
+              <Link 
+                href="/login" 
+                className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-semibold transition-colors duration-200 bg-blue-50 hover:bg-blue-100 px-4 py-2 rounded-lg"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                Entrar na conta
+              </Link>
+            </div>
           </div>
         </CardContent>
       </Card>

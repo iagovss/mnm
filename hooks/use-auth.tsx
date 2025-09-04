@@ -248,7 +248,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
 
       console.log("[v0] Login successful")
-      // setIsLoading(false) será chamado automaticamente pelo fetchUserProfile
+      setIsLoading(false)
     } catch (error) {
       console.log("[v0] Login error caught:", error)
       setIsLoading(false)
