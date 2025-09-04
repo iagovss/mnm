@@ -82,15 +82,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [checkSupabaseConfig])
 
   const fetchUserProfile = async (authUser: User): Promise<void> => {
-    if (!checkSupabaseConfig()) {
-      console.log("[v0] Skipping profile fetch - Supabase not configured")
-      setUser(authUser as AuthUser)
-      setIsLoading(false)
-      return
-    }
-
     try {
       console.log("[v0] Fetching user profile for:", authUser.email)
+
+      // Check if we're using mock client (Supabase not configured)
+      const url = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL
+      const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY
+
+      if (!url || !key) {
+        console.log("[v0] Supabase not configured, using auth user data only")
+        setUser(authUser as AuthUser)
+        setIsLoading(false)
+        return
+      }
 
       const { data: userData, error } = await supabase.from("users").select("*").eq("id", authUser.id).maybeSingle()
 
@@ -209,8 +213,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     console.log("[v0] Starting login process for email:", email)
     setIsLoading(true)
 
-    if (!checkSupabaseConfig()) {
+    // Check Supabase configuration
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL
+    const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY
+
+    if (!url || !key) {
+      console.warn("[v0] Supabase not configured - missing environment variables")
       setIsLoading(false)
+      router.push("/configure-supabase")
       throw new Error("Supabase not configured")
     }
 

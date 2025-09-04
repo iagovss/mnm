@@ -13,7 +13,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
-import { Upload, X, Phone, Mail, Facebook, Chrome } from "lucide-react"
+import { Upload, X, Phone, Mail, Facebook, Chrome, User, Building, Briefcase, Heart, Eye, EyeOff, ArrowRight, ArrowLeft, CheckCircle, Sparkles } from "lucide-react"
 import Link from "next/link"
 import { brazilianStates, getCitiesByState } from "@/lib/brazilian-locations"
 
